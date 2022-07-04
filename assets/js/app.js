@@ -1,14 +1,42 @@
-//! === ADD HEADER STYLES ON SCROLL ===
-const headerScroll =() => {
-  const headerElement = document.querySelector('.header')
-  this.scrollY >= 30 ? headerElement.classList.add('active') : headerElement.classList.remove('active')
+//! === TOGGLE NAVIGATION MENU AND ICONS ===
+const menuToggleButton = document.querySelector('.menu-toggle-button');
+const menuElement = document.querySelector('.menu');
+
+const toggleMenu = () => {
+  menuElement.classList.toggle('active');
+  menuToggleButton.classList.toggle('active');
+};
+
+menuToggleButton.addEventListener('click', toggleMenu);
+//! === OPEN AND CLOSE THE MENU ON HAMBURGER ICON CLICK ===
+const removeActiveLinkClass = e => {
+  if (e.target.classList.contains('list-link')) {
+    menuElement.classList.remove('active');
+    menuToggleButton.classList.remove('active');
+  }
 }
 
-window.addEventListener('scroll', headerScroll);
-//! === OPEN AND CLOSE THE MENU ON HAMBURGER ICON CLICK ===
+document.addEventListener('click', removeActiveLinkClass)
+// --- TOGGLESELECTION AND STORE IN THE LOCAL STORAGE ---
+const themeToggleButton = document.querySelector('.theme-toggle-button');
+const bodyElement = document.body;
+const currentTheme = localStorage.getItem('darkTheme');
 
-// --- CLOSE MENU WHEN NAV-LINKS ARE CLICKED ---
+if(currentTheme) {
+  bodyElement.classList.add('dark-theme');
+}
 
+const toggleTheme = () => {
+  bodyElement.classList.toggle('dark-theme');
+
+  if (bodyElement.classList.contains('dark-theme')) {
+    localStorage.setItem('darkTheme', 'active')
+  } else {
+    localStorage.removeItem('darkTheme', 'active')
+  }
+};
+
+themeToggleButton.addEventListener('click', toggleTheme)
 //! === SWIPER ===
 
 //! === SCROLL REVEAL ===
